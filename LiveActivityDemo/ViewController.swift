@@ -55,8 +55,8 @@ class ViewController: UIViewController {
     @IBAction func updateLiveActivity(_ sender: Any) {
         progress += 10
         // update 只有更新 ContentState 数据
-        let initialContentState = LiveActivitiesWidgetAttributes.ContentState(progress: progress, statusName: "doing")
-        let contentState = ActivityContent(state: initialContentState, staleDate: nil)
+        let updateContentState = LiveActivitiesWidgetAttributes.ContentState(progress: progress, statusName: "doing")
+        let contentState = ActivityContent(state: updateContentState, staleDate: nil)
         // 更新时，可传alert
         let alertConfiguration = AlertConfiguration(title: "alert", body: "alert body", sound: .default)
         Task {
@@ -67,8 +67,8 @@ class ViewController: UIViewController {
     
     @IBAction func endLiveActivity(_ sender: Any) {
         // end 只有更新 ContentState 数据
-        let initialContentState = LiveActivitiesWidgetAttributes.ContentState(progress: 100, statusName: "finished")
-        let contentState = ActivityContent(state: initialContentState, staleDate: nil)
+        let endContentState = LiveActivitiesWidgetAttributes.ContentState(progress: 100, statusName: "finished")
+        let contentState = ActivityContent(state: endContentState, staleDate: nil)
         Task {
             try? await Task.sleep(nanoseconds: UInt64(5 * Double(NSEC_PER_SEC)))
             // 结束，但 锁屏页仍保留 live activity 信息
